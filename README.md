@@ -1,25 +1,59 @@
-# Average Speed Tracker
+# Speed Tracker BG 🇧🇬
 
-A Flutter application that tracks your average speed while driving using GPS location services. The app provides real-time speed monitoring, distance calculation, and various driving metrics.
+A comprehensive Flutter application designed specifically for Bulgarian roads that tracks your speed while driving and warns about speed cameras and limits. Features real-time GPS monitoring, speed camera detection, and interactive mapping.
 
 ## Features
 
-- **Real-time Speed Tracking**: Monitor your current speed in km/h
+### Speed Tracking
+- **Real-time Speed Tracking**: Monitor your current speed in km/h with color-coded display
 - **Average Speed Calculation**: Calculate average speed throughout your journey
 - **Maximum Speed Recording**: Track your peak speed during the trip
-- **Distance Measurement**: Calculate total distance traveled
-- **Duration Timer**: Track the duration of your journey
-- **Clean Material Design UI**: Intuitive dashboard with metric cards
+- **Distance Measurement**: Calculate total distance traveled using GPS coordinates
+- **Duration Timer**: Track the duration of your journey with HH:MM:SS format
 
-## Screenshots
+### Speed Camera & Limit System
+- **Bulgarian Speed Camera Database**: 12+ camera locations along major routes (Sofia-Varna)
+- **1km Advance Warnings**: Visual and audio alerts when approaching cameras
+- **Average Speed Zones**: Botevgrad and Veliko Tarnovo sections with zone tracking
+- **Dynamic Speed Limits**: Automatic speed limit detection based on road type and location
+- **Audio Warnings**: Text-to-speech announcements in English
+- **Visual Warning Banners**: Color-coded alerts (green/orange/red) based on proximity and speed
 
-The app displays six key metrics in a grid layout:
-- Current Speed (km/h)
-- Average Speed (km/h)
-- Maximum Speed (km/h)
-- Total Distance (km)
-- Duration (HH:MM:SS)
-- Tracking Status
+### Interactive Map
+- **Google Maps Integration**: Real-time map with your current location
+- **Speed Camera Markers**: All cameras marked with different colors based on type
+  - Fixed cameras (orange/red)
+  - Mobile cameras (yellow/red)
+  - Average speed zone markers (green)
+- **Warning Zones**: Proximity circles around nearby cameras
+- **Speed Limit Overlays**: Road sections with different speed limits visualized
+- **Route Visualization**: Average speed zones shown as dashed lines
+- **Map Controls**: Zoom in/out and center on location buttons
+
+## User Interface
+
+### Tabbed Interface
+The app features two main tabs:
+
+#### Dashboard Tab
+- **Large Speed Display**: Current speed with color coding (green=safe, orange=warning, red=over limit)
+- **Speed Limit Indicator**: Current road speed limit in red bordered box
+- **6 Metric Cards**:
+  - Current Speed (km/h)
+  - Average Speed (km/h) 
+  - Maximum Speed (km/h)
+  - Total Distance (km)
+  - Duration (HH:MM:SS)
+  - Cameras Nearby (count)
+
+#### Map Tab
+- **Interactive Google Map** with Bulgarian road network
+- **Current Location Marker** (blue) with speed overlay
+- **Speed Camera Markers** color-coded by type and proximity
+- **Speed Limit Route Overlays** showing different road speed zones
+- **Warning Circles** around cameras within detection range
+- **Map Legend** explaining all markers and colors
+- **Map Controls** for zoom and location centering
 
 ## Getting Started
 
@@ -35,16 +69,26 @@ The app displays six key metrics in a grid layout:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/avgspeed.git
+git clone https://github.com/vlados/avgspeed.git
 cd avgspeed
 ```
 
-2. Install dependencies:
+2. **Get Google Maps API Key** (required for map functionality):
+   - Go to [Google Cloud Console](https://console.cloud.google.com/)
+   - Create a new project or select existing one
+   - Enable Maps SDK for Android, iOS, and JavaScript
+   - Create credentials (API Key)
+   - Replace `key` with your API key in:
+     - `android/app/src/main/AndroidManifest.xml`
+     - `ios/Runner/AppDelegate.swift`
+     - `web/index.html`
+
+3. Install dependencies:
 ```bash
 flutter pub get
 ```
 
-3. Run the app:
+4. Run the app:
 ```bash
 # For iOS Simulator
 flutter run -d ios

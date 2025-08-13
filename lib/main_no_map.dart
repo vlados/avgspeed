@@ -6,7 +6,6 @@ import 'package:audioplayers/audioplayers.dart';
 import 'dart:async';
 import 'services/camera_service.dart';
 import 'models/speed_camera.dart';
-import 'widgets/speed_map.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,9 +34,7 @@ class SpeedTrackerScreen extends StatefulWidget {
   State<SpeedTrackerScreen> createState() => _SpeedTrackerScreenState();
 }
 
-class _SpeedTrackerScreenState extends State<SpeedTrackerScreen> with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-  
+class _SpeedTrackerScreenState extends State<SpeedTrackerScreen> {
   bool _isTracking = false;
   double _currentSpeed = 0.0;
   double _averageSpeed = 0.0;
@@ -67,7 +64,6 @@ class _SpeedTrackerScreenState extends State<SpeedTrackerScreen> with SingleTick
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
     _checkPermissions();
     _initializeTTS();
   }
@@ -171,10 +167,7 @@ class _SpeedTrackerScreenState extends State<SpeedTrackerScreen> with SingleTick
   }
 
   void _updateSpeed(Position position) {
-    setState(() {
-      _currentPosition = position;
-    });
-    
+    _currentPosition = position;
     final speedInMps = position.speed;
     final speedInKmh = speedInMps * 3.6;
 
@@ -406,135 +399,10 @@ class _SpeedTrackerScreenState extends State<SpeedTrackerScreen> with SingleTick
     );
   }
 
-  Widget _buildDashboardTab() {
-    return Column(
-      children: [
-        // Warning banner
-        _buildWarningBanner(),
-        
-        // Speed limit indicator
-        Container(
-          padding: const EdgeInsets.all(16),
-          color: _getSpeedColor().withOpacity(0.1),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  Text(
-                    '${_currentSpeed.toStringAsFixed(0)}',
-                    style: TextStyle(
-                      fontSize: 48,
-                      fontWeight: FontWeight.bold,
-                      color: _getSpeedColor(),
-                    ),
-                  ),
-                  const Text('Current Speed'),
-                ],
-              ),
-              const SizedBox(width: 40),
-              Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.red, width: 3),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      '$_currentSpeedLimit',
-                      style: const TextStyle(
-                        fontSize: 36,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  const Text('Speed Limit'),
-                ],
-              ),
-            ],
-          ),
-        ),
-        
-        // Metrics grid
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: GridView.count(
-              crossAxisCount: 2,
-              childAspectRatio: 1.2,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-              children: [
-                _buildMetricCard(
-                  'Average Speed',
-                  '${_averageSpeed.toStringAsFixed(1)} km/h',
-                  Icons.trending_up,
-                  Colors.green,
-                ),
-                _buildMetricCard(
-                  'Max Speed',
-                  '${_maxSpeed.toStringAsFixed(1)} km/h',
-                  Icons.flash_on,
-                  Colors.orange,
-                ),
-                _buildMetricCard(
-                  'Distance',
-                  '${_totalDistance.toStringAsFixed(2)} km',
-                  Icons.straighten,
-                  Colors.purple,
-                ),
-                _buildMetricCard(
-                  'Duration',
-                  _formatDuration(_trackingDuration),
-                  Icons.timer,
-                  Colors.teal,
-                ),
-                _buildMetricCard(
-                  'Cameras Nearby',
-                  '${_cameraWarnings.length}',
-                  Icons.camera_alt,
-                  _cameraWarnings.isNotEmpty ? Colors.red : Colors.grey,
-                ),
-                _buildMetricCard(
-                  'Status',
-                  _isTracking ? 'Tracking' : 'Stopped',
-                  _isTracking ? Icons.gps_fixed : Icons.gps_off,
-                  _isTracking ? Colors.green : Colors.red,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildMapTab() {
-    return Column(
-      children: [
-        // Warning banner
-        _buildWarningBanner(),
-        
-        // Map
-        Expanded(
-          child: SpeedMap(
-            currentPosition: _currentPosition,
-            currentSpeed: _currentSpeed,
-            currentSpeedLimit: _currentSpeedLimit,
-            cameraWarnings: _cameraWarnings,
-            averageSpeedWarning: _averageSpeedWarning,
-          ),
-        ),
-      ],
-    );
-  }
-
   @override
   void dispose() {
     _positionStreamSubscription?.cancel();
     _timer?.cancel();
-    _tabController.dispose();
     _tts.stop();
     _audioPlayer.dispose();
     super.dispose();
@@ -556,40 +424,110 @@ class _SpeedTrackerScreenState extends State<SpeedTrackerScreen> with SingleTick
             },
           ),
         ],
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: const [
-            Tab(icon: Icon(Icons.dashboard), text: 'Dashboard'),
-            Tab(icon: Icon(Icons.map), text: 'Map'),
-          ],
-        ),
       ),
       body: Column(
         children: [
-          // Tab content
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
+          // Warning banner
+          _buildWarningBanner(),
+          
+          // Speed limit indicator
+          Container(
+            padding: const EdgeInsets.all(16),
+            color: _getSpeedColor().withOpacity(0.1),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildDashboardTab(),
-                _buildMapTab(),
+                Column(
+                  children: [
+                    Text(
+                      '${_currentSpeed.toStringAsFixed(0)}',
+                      style: TextStyle(
+                        fontSize: 48,
+                        fontWeight: FontWeight.bold,
+                        color: _getSpeedColor(),
+                      ),
+                    ),
+                    const Text('Current Speed'),
+                  ],
+                ),
+                const SizedBox(width: 40),
+                Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.red, width: 3),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        '$_currentSpeedLimit',
+                        style: const TextStyle(
+                          fontSize: 36,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const Text('Speed Limit'),
+                  ],
+                ),
               ],
             ),
           ),
           
-          // Control buttons
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.3),
-                  blurRadius: 4,
-                  offset: const Offset(0, -2),
-                ),
-              ],
+          // Metrics grid
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: GridView.count(
+                crossAxisCount: 2,
+                childAspectRatio: 1.2,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                children: [
+                  _buildMetricCard(
+                    'Average Speed',
+                    '${_averageSpeed.toStringAsFixed(1)} km/h',
+                    Icons.trending_up,
+                    Colors.green,
+                  ),
+                  _buildMetricCard(
+                    'Max Speed',
+                    '${_maxSpeed.toStringAsFixed(1)} km/h',
+                    Icons.flash_on,
+                    Colors.orange,
+                  ),
+                  _buildMetricCard(
+                    'Distance',
+                    '${_totalDistance.toStringAsFixed(2)} km',
+                    Icons.straighten,
+                    Colors.purple,
+                  ),
+                  _buildMetricCard(
+                    'Duration',
+                    _formatDuration(_trackingDuration),
+                    Icons.timer,
+                    Colors.teal,
+                  ),
+                  _buildMetricCard(
+                    'Cameras Nearby',
+                    '${_cameraWarnings.length}',
+                    Icons.camera_alt,
+                    _cameraWarnings.isNotEmpty ? Colors.red : Colors.grey,
+                  ),
+                  _buildMetricCard(
+                    'Status',
+                    _isTracking ? 'Tracking' : 'Stopped',
+                    _isTracking ? Icons.gps_fixed : Icons.gps_off,
+                    _isTracking ? Colors.green : Colors.red,
+                  ),
+                ],
+              ),
             ),
+          ),
+          
+          // Control buttons
+          Padding(
+            padding: const EdgeInsets.all(16.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
