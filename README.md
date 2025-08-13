@@ -1,34 +1,63 @@
 # Speed Tracker BG 🇧🇬
 
-A comprehensive Flutter application designed specifically for Bulgarian roads that tracks your speed while driving and warns about speed cameras and limits. Features real-time GPS monitoring, speed camera detection, and interactive mapping.
+**The Ultimate Driving Companion for Bulgarian Roads**
 
-## Features
+A comprehensive Flutter application designed specifically for Bulgarian roads that tracks your speed while driving and warns about speed cameras and speed limits. Stay safe, avoid fines, and drive with confidence using real-time GPS monitoring, intelligent speed camera detection, and interactive mapping.
 
-### Speed Tracking
-- **Real-time Speed Tracking**: Monitor your current speed in km/h with color-coded display
-- **Average Speed Calculation**: Calculate average speed throughout your journey
-- **Maximum Speed Recording**: Track your peak speed during the trip
-- **Distance Measurement**: Calculate total distance traveled using GPS coordinates
-- **Duration Timer**: Track the duration of your journey with HH:MM:SS format
+## 🎯 Why Speed Tracker BG?
 
-### Speed Camera & Limit System
-- **Bulgarian Speed Camera Database**: 12+ camera locations along major routes (Sofia-Varna)
-- **1km Advance Warnings**: Visual and audio alerts when approaching cameras
-- **Average Speed Zones**: Botevgrad and Veliko Tarnovo sections with zone tracking
-- **Dynamic Speed Limits**: Automatic speed limit detection based on road type and location
-- **Audio Warnings**: Text-to-speech announcements in English
-- **Visual Warning Banners**: Color-coded alerts (green/orange/red) based on proximity and speed
+### **Drive Safer, Drive Smarter**
+- **Avoid Costly Fines**: Get warned 1km before speed cameras and average speed zones
+- **Stay Legal**: Real-time speed limit display ensures you never accidentally speed
+- **Save Money**: Prevent expensive traffic violations with advance camera warnings
+- **Peace of Mind**: Focus on driving while the app monitors your speed and surroundings
 
-### Interactive Map
-- **Google Maps Integration**: Real-time map with your current location
-- **Speed Camera Markers**: All cameras marked with different colors based on type
-  - Fixed cameras (orange/red)
-  - Mobile cameras (yellow/red)
-  - Average speed zone markers (green)
-- **Warning Zones**: Proximity circles around nearby cameras
-- **Speed Limit Overlays**: Road sections with different speed limits visualized
-- **Route Visualization**: Average speed zones shown as dashed lines
-- **Map Controls**: Zoom in/out and center on location buttons
+### **Built for Bulgaria 2025**
+- **New Average Speed Zones**: First app to support Bulgaria's new toll-camera enforcement system
+- **A2 Hemus Ready**: Complete coverage of Sofia-Varna route with Botevgrad and Veliko Tarnovo zones
+- **Municipal Cameras**: Database includes Sofia, Plovdiv, and regional enforcement cameras
+- **Real-time Updates**: Community-driven mobile camera alerts from fellow drivers
+
+## 🚀 Key Features
+
+### **Smart Speed Monitoring**
+- **🎯 Instant Speed Display**: Large, color-coded current speed (green=safe, orange=warning, red=danger)
+- **📊 Trip Analytics**: Track average speed, max speed, distance, and journey duration
+- **🎯 Speed Limit Awareness**: Always know the current road's speed limit
+- **📈 Performance Insights**: Analyze your driving patterns over time
+
+### **Advanced Camera Detection System**
+- **🚨 1km Early Warnings**: Visual and audio alerts before speed cameras
+- **🎯 Smart Camera Types**: 
+  - Fixed speed cameras (permanent installations)
+  - Mobile speed traps (police units)
+  - Average speed zones (toll camera sections)
+  - Red light cameras
+- **🔊 Voice Announcements**: Clear English audio warnings with distance and speed limit
+- **👥 Community Alerts**: Real-time mobile camera reports from other drivers
+- **📍 Precise Locations**: GPS-accurate camera positions with direction of enforcement
+
+### **Revolutionary Average Speed Zone Support**
+- **🆕 Industry First**: Only app supporting Bulgaria's new average speed enforcement
+- **📏 Zone Tracking**: Enter/exit notifications with real-time average calculation
+- **⚡ Smart Recommendations**: Suggests optimal speed to maintain legal average
+- **🎯 Visual Indicators**: Clear zone boundaries and progress on map
+
+### **Professional Interactive Mapping**
+- **🗺️ Google Maps Integration**: High-quality satellite and road view mapping
+- **📍 Live Location**: Real-time position with speed and limit overlay
+- **🎨 Smart Visualization**:
+  - Camera markers color-coded by proximity and type
+  - Warning circles around nearby enforcement points  
+  - Speed limit route overlays
+  - Average speed zones as dashed lines
+- **🎮 Intuitive Controls**: Easy zoom, pan, and location centering
+
+### **Dual-Tab Interface**
+- **📱 Dashboard View**: Focus on speed metrics and warnings
+- **🗺️ Map View**: Visual navigation with camera locations
+- **⚡ Instant Switching**: Toggle between views while driving
+- **📊 Rich Metrics**: 6 comprehensive driving statistics cards
 
 ## User Interface
 

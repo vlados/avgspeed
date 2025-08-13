@@ -476,7 +476,7 @@ class _SpeedTrackerScreenState extends State<SpeedTrackerScreen> with SingleTick
             padding: const EdgeInsets.all(16.0),
             child: GridView.count(
               crossAxisCount: 2,
-              childAspectRatio: 1.2,
+              childAspectRatio: 0.85,
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
               children: [
