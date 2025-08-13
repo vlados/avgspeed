@@ -237,6 +237,38 @@ flutter build web --release
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+## TODO / Roadmap 🚧
+
+### Upcoming Features
+- [ ] **Commercial Data Integration**: Evaluate TomTom vs HERE Maps for enhanced camera database
+- [ ] **Community Features**: 
+  - [ ] User-reported mobile camera submissions with confidence scoring
+  - [ ] Crowdsourced validation system for camera accuracy
+  - [ ] Real-time community alerts network
+- [ ] **Enhanced Average Speed Zones**: 
+  - [ ] More Bulgarian toll sections (A1, A4 highways)
+  - [ ] Historical average speed analytics
+  - [ ] Speed recommendations for optimal fuel efficiency
+- [ ] **Advanced Analytics**:
+  - [ ] Trip history and driving patterns
+  - [ ] Fuel consumption estimates based on speed
+  - [ ] Carbon footprint tracking
+- [ ] **Multi-language Support**: Bulgarian language interface
+- [ ] **Offline Mode**: Continue tracking without internet connection
+- [ ] **Integration**: 
+  - [ ] Android Auto / Apple CarPlay support
+  - [ ] OBD-II integration for vehicle data
+- [ ] **Premium Features**:
+  - [ ] Weather-based speed recommendations
+  - [ ] Traffic-aware route optimization
+  - [ ] Advanced reporting and exports
+
+### Technical Improvements
+- [ ] **Performance**: Optimize map rendering for smoother experience
+- [ ] **Battery**: Implement power-efficient GPS tracking modes
+- [ ] **Security**: Enhanced encryption for user data
+- [ ] **Testing**: Comprehensive unit and integration test coverage
+
 ## License
 
 This project is open source and available under the MIT License.
