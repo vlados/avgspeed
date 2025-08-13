@@ -73,15 +73,30 @@ git clone https://github.com/vlados/avgspeed.git
 cd avgspeed
 ```
 
-2. **Get Google Maps API Key** (required for map functionality):
+2. **Configure Google Maps API Key** (required for map functionality):
    - Go to [Google Cloud Console](https://console.cloud.google.com/)
    - Create a new project or select existing one
-   - Enable Maps SDK for Android, iOS, and JavaScript
-   - Create credentials (API Key)
-   - Replace `key` with your API key in:
-     - `android/app/src/main/AndroidManifest.xml`
-     - `ios/Runner/AppDelegate.swift`
-     - `web/index.html`
+   - Enable Maps SDK for Android, iOS, and JavaScript APIs
+   - Create credentials (API Key) 
+   - **Set up environment variables** (choose one method):
+
+   **Method A: Using .env file (Development)**
+   ```bash
+   # Copy the example file
+   cp .env.example .env
+   
+   # Edit .env and add your API key
+   GOOGLE_MAPS_API_KEY=your_actual_api_key_here
+   ```
+
+   **Method B: Using dart-define (Production)**
+   ```bash
+   # Run with dart-define
+   flutter run --dart-define=GOOGLE_MAPS_API_KEY=your_actual_api_key_here
+   
+   # Build for production
+   flutter build apk --dart-define=GOOGLE_MAPS_API_KEY=your_actual_api_key_here
+   ```
 
 3. Install dependencies:
 ```bash
@@ -154,6 +169,23 @@ This app requires location permissions to function. Location data is:
 - Not transmitted to any servers
 - Not stored permanently
 - Only active while the app is in use
+
+## Environment Variables & Security
+
+The app uses environment variables to securely manage sensitive configuration:
+
+### Available Variables
+- `GOOGLE_MAPS_API_KEY`: Google Maps API key (required)
+- `APP_NAME`: Application display name
+- `APP_VERSION`: Application version
+- `DEBUG_MODE`: Enable debug logging (true/false)
+- `ENABLE_LOGS`: Enable console logs (true/false)
+
+### Security Benefits
+- **API Keys Protected**: No hardcoded API keys in source code
+- **Git Safe**: `.env` file is excluded from version control
+- **Environment Specific**: Different keys for development/production
+- **Easy Management**: Single place to manage all configuration
 
 ## Building for Production
 

@@ -5,6 +5,7 @@ import 'package:geolocator/geolocator.dart';
 import '../models/speed_camera.dart';
 import '../data/bulgarian_cameras.dart';
 import '../services/camera_service.dart';
+import '../services/env_service.dart';
 
 class SpeedMap extends StatefulWidget {
   final Position? currentPosition;
@@ -366,6 +367,40 @@ class _SpeedMapState extends State<SpeedMap> {
 
   @override
   Widget build(BuildContext context) {
+    // Check if Google Maps API key is properly configured
+    if (!EnvService.isConfigurationValid) {
+      return Container(
+        height: 300,
+        child: Card(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.error_outline, size: 64, color: Colors.orange),
+                SizedBox(height: 16),
+                Text(
+                  'Google Maps API Key Required',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Text(
+                    'Please configure your Google Maps API key in the .env file',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.grey[600]),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+    
     return Container(
       height: 300,
       child: Stack(

@@ -5,10 +5,24 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'dart:async';
 import 'services/camera_service.dart';
+import 'services/env_service.dart';
 import 'models/speed_camera.dart';
 import 'widgets/speed_map.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize environment variables
+  await EnvService.init();
+  
+  // Print configuration summary in debug mode
+  if (EnvService.isDebugMode && EnvService.enableLogs) {
+    print('Environment Configuration:');
+    EnvService.configSummary.forEach((key, value) {
+      print('  $key: $value');
+    });
+  }
+  
   runApp(const MyApp());
 }
 
@@ -18,7 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Speed Tracker BG',
+      title: EnvService.appName,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,

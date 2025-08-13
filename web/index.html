@@ -21,7 +21,12 @@
   <meta name="description" content="Speed Tracker BG - Bulgarian speed camera and limit monitoring app.">
 
   <!-- Google Maps JavaScript API -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=key&libraries=geometry"></script>
+  <!-- The API key will be replaced during build process -->
+  <script>
+    // Get API key from window.flutterConfiguration if available (dart-define)
+    const apiKey = window.flutterConfiguration?.GOOGLE_MAPS_API_KEY || 'YOUR_GOOGLE_MAPS_API_KEY';
+    document.write('<script src="https://maps.googleapis.com/maps/api/js?key=' + apiKey + '&libraries=geometry"><\/script>');
+  </script>
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">

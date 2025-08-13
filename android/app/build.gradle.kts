@@ -28,6 +28,9 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        
+        // Configure manifest placeholders for environment variables
+        manifestPlaceholders["GOOGLE_MAPS_API_KEY"] = project.findProperty("dart.env.GOOGLE_MAPS_API_KEY") ?: "YOUR_GOOGLE_MAPS_API_KEY"
     }
 
     buildTypes {
